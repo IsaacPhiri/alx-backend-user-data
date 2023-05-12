@@ -17,7 +17,6 @@ def index() -> str:
     Return:
         - The home page's payload.
     """
-    
     return jsonify({"message": "Bienvenue"})
 
 
@@ -27,7 +26,6 @@ def users() -> str:
     Return:
         - The account creation payload.
     """
-    
     email, password = request.form.get("email"), request.form.get("password")
     try:
         AUTH.register_user(email, password)
@@ -42,7 +40,6 @@ def login() -> str:
     Return:
         - The account login payload.
     """
-    
     email, password = request.form.get("email"), request.form.get("password")
     if not AUTH.valid_login(email, password):
         abort(401)
@@ -58,7 +55,6 @@ def logout() -> str:
     Return:
         - Redirects to home route.
     """
-    
     session_id = request.cookies.get("session_id")
     user = AUTH.get_user_from_session_id(session_id)
     if user is None:
@@ -73,7 +69,6 @@ def profile() -> str:
     Return:
         - The user's profile information.
     """
-    
     session_id = request.cookies.get("session_id")
     user = AUTH.get_user_from_session_id(session_id)
     if user is None:
@@ -87,7 +82,6 @@ def get_reset_password_token() -> str:
     Return:
         - The user's password reset payload.
     """
-    
     email = request.form.get("email")
     reset_token = None
     try:
@@ -106,7 +100,6 @@ def update_password() -> str:
     Return:
         - The user's password updated payload.
     """
-    
     email = request.form.get("email")
     reset_token = request.form.get("reset_token")
     new_password = request.form.get("new_password")
